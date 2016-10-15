@@ -19,11 +19,15 @@
 		    this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
 
 		    this.player;
+		    this.abbo;
 
 		    window.game = game;
 		}
 		Game.prototype.create = function(){
 	        this.game.debug.context.fillStyle = 'rgba(255,0,0,0.6)';
+			//disable smoothing for pixel art
+			this.game.stage.smoothed = false;
+			this.game.renderer.renderSession.roundPixels = true;
 			//add level background
 			var levelBg = this.game.add.sprite(0, 0, 'bg');
 
@@ -32,11 +36,9 @@
 			this.game.world.setBounds(0, 0, levelBg.width, levelBg.height);
 			this.game.time.advancedTiming = true;
 			
-			// Background animations
-			//
+			/* Background level animations */
 			// fire animation (560, 120)
 			this.fire = new Fire (this.game, 560, 120);
-			
 			//
 			//Left gang animation
 			var leftGang = game.add.sprite (490, 86, 'left_gang');
@@ -48,9 +50,6 @@
 			rightGang.animations.add('stay');
 			rightGang.animations.play('stay', 2, true);
 
-			//disable smoothing for pixel art
-			this.game.stage.smoothed = false;
-			this.game.renderer.renderSession.roundPixels = true;
 			
 			// create final  boss (Abbobo)
 			this.abbo = new Abbo(this.game, 1300, 200);
@@ -63,11 +62,11 @@
 			var enemyY;
 			
 			// spawn first group of enemies
-				for (var i = 0; i < 4; i++) {
-					enemyX = Math.floor(50 + Math.random() * 500);
-					enemyY = Math.floor(174 + Math.random() * 65);
-					this.enemy = new Enemy(this.game, enemyX, enemyY);
-				}
+			for (var i = 0; i < 4; i++) {
+				enemyX = Math.floor(50 + Math.random() * 500);
+				enemyY = Math.floor(174 + Math.random() * 65);
+				this.enemy = new Enemy(this.game, enemyX, enemyY);
+			}
 			
 
 			//set the camera follow to be more beat em up style;
