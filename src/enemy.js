@@ -3,6 +3,7 @@ var Enemy = (function(){
 		Phaser.Sprite.call(this, game, x, y,'enemy_sheet');	
 	
 		game.physics.arcade.enable(this);
+		this.health = 50;
 		this.EnemyDeltaVelocity = 0.5;
 		this.scale.x = -1;
 		this.anchor.setTo(0.5, 1);
@@ -19,7 +20,7 @@ var Enemy = (function(){
 	
 	
 	Enemy.prototype.update = function() {
-		this.animations.play('idle');		
+		this.animations.play('idle');
 	}
 	return Enemy;
 })();
